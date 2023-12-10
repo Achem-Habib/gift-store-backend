@@ -39,19 +39,22 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     "rest_framework_simplejwt",
+    'django_summernote',
 
     "django.contrib.sites",
 
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
 
     "dj_rest_auth",
     "dj_rest_auth.registration",
 
     # local
     'shop',
-    'authentication'
+    'authentication',
+    'orders'
 ]
 
 
@@ -176,7 +179,7 @@ ACCOUNT_EMAIL_VERIFICATION = "none"
 # set up the authentication classes
 REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": (
-        "rest_framework.permissions.IsAuthenticated",
+        "rest_framework.permissions.AllowAny",
     ),
 
     "DEFAULT_AUTHENTICATION_CLASSES": [
@@ -199,3 +202,24 @@ else:
         "http://localhost:3000/",
         "http://127.0.0.1:3000/",
     ]
+
+
+# social login settings
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "APP": {
+            # need to move clien_id and secret in environment file in production
+            "client_id": "771239685047-uq3nr21eosmkemt3mhhkbpi76hv3necj.apps.googleusercontent.com",
+            "secret": "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",
+            "key": "",                               # leave empty
+        },
+        "SCOPE": [
+            "profile",
+            "email",
+        ],
+        "AUTH_PARAMS": {
+            "access_type": "online",
+        },
+        "VERIFIED_EMAIL": True,
+    },
+}

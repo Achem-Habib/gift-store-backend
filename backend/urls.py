@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('shop.urls', namespace='api')),
     path('api/auth/', include('authentication.urls')),
+    path('summernote/', include('django_summernote.urls')),
 ]
 
 
